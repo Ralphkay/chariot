@@ -1,0 +1,89 @@
+ <div class="row row-sm mg-t-20">
+          <div class="col-sm-6 col-lg-3">
+            <div class="card shadow-base bd-1 bd-primary">
+              <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-12 tx-white mg-b-0">Monthly Dues: </h6>
+                  <span class="tx-white tx-uppercase">
+                      <a href="{% url 'view_welfare_levy_payment_list' member.id %}" class="tx-white tx-bold pd-r-2">View</a> •
+                  <a href="" class="tx-white tx-bold">Pay</a>
+                  </span>
+              </div><!-- card-header -->
+              <div class="card-body d-xs-flex justify-content-between align-items-center">
+                <h4 class="mg-b-0 tx-uppercase tx-13 tx-inverse tx-lato tx-bold">
+                    {% if paid_this_month_levy_status == True%}
+                        <span class="tx-primary tx-13">PAID  GH¢ {{ latest_member_levy_paid.month_levy_paid}}</span>
+                    {% else %}
+                        <span class="tx-danger">Not Paid</span>
+                    {% endif %}
+                   </h4>
+                                <p class="mg-b-0 tx-sm"><span class="tx-primary"> {{ current_month}}, {{ current_year }}</span></p>
+
+
+              </div><!-- card-body -->
+            </div><!-- card -->
+          </div><!-- col-4 -->
+          <div class="col-sm-4 col-lg-3">
+            <div class="card bd-primary bd-1 shadow-base">
+              <div class="card-header bg-info d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-white tx-uppercase tx-12 mg-b-0">Welfare Dues: </h6>
+                   <span class="tx-white">
+                      <a href="" class="tx-white tx-bold pd-r-2">View</a> •
+                  <a href="" class="tx-white tx-bold">Pay</a>
+                  </span>
+              </div><!-- card-header -->
+              <div class="card-body d-xs-flex justify-content-between align-items-center">
+                <h4 class="mg-b-0 tx-14 tx-uppercase tx-13 tx-inverse tx-lato tx-bold">
+                    {% if paid_this_month_wlevy_status == True%}
+                        <span class="tx-info tx-13">GH¢ {{ latest_member_welfare_levy_paid.month_levy_paid}}</span>
+                    {% else %}
+                        <span class="tx-danger">Not Paid</span>
+                    {% endif %}
+                   </h4>
+                  <p class="mg-b-0 tx-sm"><span class="tx-info"> {{ current_month}}, {{ current_year }}</span></p>
+              </div><!-- card-body -->
+            </div><!-- card -->
+          </div><!-- col-4 -->
+          <div class="col-sm-4 col-lg-3 mg-t-20 mg-lg-t-0">
+            <div class="card shadow-base bd-warning bd-1">
+              <div class="card-header bg-warning d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-white tx-12 mg-b-0">Contributions</h6>
+                   <span class="tx-white">
+                      <a href="" class="tx-white tx-bold pd-r-2">View</a> •
+                  <a href="" class="tx-white tx-bold">Pay</a>
+                  </span>
+              </div><!-- card-header -->
+              <div class="card-body d-xs-flex justify-content-between align-items-center">
+                  <span class="tx-warning tx-13 tx-bold"> GH¢ {{ member_monetary_donations_since_last_year}}</span>
+                <p class="mg-b-0 tx-sm tx-warning">Since last year</p>
+              </div><!-- card-body -->
+            </div><!-- card -->
+          </div><!-- col-4 -->
+          <div class="col-sm-4 col-lg-3 mg-t-20 mg-lg-t-0">
+            <div class="card shadow-base bd-1 bd-gray-900">
+              <div class="card-header bg-dark d-flex justify-content-between align-items-center  ">
+                <h6 class="card-title tx-uppercase tx-12 mg-b-0 tx-white">Pledges Made</h6>
+                  <span class="tx-white">
+                      <a href="" class="tx-white tx-bold pd-r-2">View</a> •
+                  <a href="" class="tx-white tx-bold">Pay</a>
+                  </span>
+              </div><!-- card-header -->
+              <div class="card-body d-xs-flex justify-content-between align-items-center">
+
+                <h4 class="mg-b-0  tx-13 tx-lato tx-bold tx-dark">GH¢ {{ member_pledges_pending }}</h4>
+                <p class="mg-b-0 tx-sm">
+                    {% if member_pledges_pending == 0.0 %}
+                        <span class="tx-dark">
+                        NO OUTSTANDING PLEDGES
+                        </span>
+                        {% else %}
+                            <span class="tx-danger">
+                        PLEDGE TO BE PAID
+                            </span>
+
+                    {% endif %}
+
+                </p>
+              </div><!-- card-body -->
+            </div><!-- card -->
+          </div><!-- col-4 -->
+        </div><!-- row -->
