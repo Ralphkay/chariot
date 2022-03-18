@@ -9,14 +9,18 @@ class Pledge(models.Model):
         ('pending', 'Pending'),
         ('redeemed', 'Redeemed'),
     )
-
     pledge_person = models.CharField(max_length=255, blank=False, null=False)
-
-    redeemed_status = models.CharField(max_length=255, blank=False, null=False, choices=redeemed_status_choices,
-                                       default=redeemed_status_choices[0])
-    amount_pledge = models.FloatField(null=False, blank=False, default=0.00)
-
     contact_information = models.TextField(null=True, blank=True)
+    redeemed_status = models.CharField(max_length=255, blank=False, null=False, choices=redeemed_status_choices,
+                                       default=redeemed_status_choices[0][0])
+
+    item = models.CharField(max_length=255, blank=False, null=False)
+    quantity_pledged = models.IntegerField(null=False, blank=False, default=0)
+    quantity_redeemed = models.IntegerField(null=True, blank=True, default=0)
+    description = models.TextField(blank=True, null=True)
+
+    amount_paid = models.FloatField(null=True, blank=True, default=0.00)
+    amount_pledged = models.FloatField(null=False, blank=False, default=0.00)
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -27,25 +31,47 @@ class Pledge(models.Model):
     def __str__(self):
         return f"{self.pledge_person} – {self.redeemed_status.capitalize()}"
 
+    def save(self, *args, **kwargs):
+        if self.amount_pledged and self.amount_paid:
+            if self.amount_paid >= self.amount_pledged:
+                self.redeemed_status = self.redeemed_status_choices[1][0]
+            else:
+                self.redeemed_status = self.redeemed_status_choices[0][0]
+
+        if self.quantity_pledged and self.quantity_redeemed:
+            if self.quantity_pledged <= self.quantity_redeemed:
+                self.redeemed_status = self.redeemed_status_choices[1][0]
+            else:
+                self.redeemed_status = self.redeemed_status_choices[0][0]
+
+        super().save(*args, **kwargs)
+
 
 class MonetaryPledge(Pledge):
-    amount_pledge = models.FloatField(null=False, blank=False, default=0.00)
+    item = None
+    quantity_pledged = None
+    quantity_redeemed = None
+    description = None
 
 
 class MaterialPledge(Pledge):
     item = models.CharField(max_length=255, blank=False, null=False)
-    quantity = models.IntegerField(null=False, blank=True, default=0)
-    description = models.TextField(blank=True, null=True)
-    amount_pledge = None
+    amount_pledged = None
+    amount_paid = None
 
 
 class MemberMonetaryPledge(Pledge):
     pledge_person = models.ForeignKey(Member, on_delete=models.CASCADE)
 
+    item = None
+    quantity_pledged = None
+    quantity_redeemed = None
+    description = None
+
 
 class MemberMaterialPledge(Pledge):
     pledge_person = models.ForeignKey(Member, on_delete=models.CASCADE)
-
     item = models.CharField(max_length=255, blank=False, null=False)
-    quantity = models.IntegerField(null=False, blank=True, default=0)
-    description = models.TextField(blank=True, null=True)
+
+    amount_pledged = None
+    amount_paid = None

@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: pkg
+Version: 0.2
+Summary: Python scripts dealing with software packages used in building applications and systems
+Home-page: https://github.com/joaomdsc/pkg
+Author: João Moreira de Sá Coutinho
+Author-email: joao.moreiradsc@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7.3
+Description-Content-Type: text/x-rst
+
+.. warning::
+
+   This is work in progress, installing with 'pip' is not supported at this
+   point. If you're looking for python scripts to automate the LFS (`Linux From
+   Scratch`_) build, please see `github.com/joaomdsc/pkg`_.
+
+Documentation for this software can be found on `pkg.readthedocs.io`_.
+
+.. _Linux From Scratch: http://www.linuxfromscratch.org/
+.. _github.com/joaomdsc/pkg: https://github.com/joaomdsc/pkg
+.. _pkg.readthedocs.io: https://pkg.readthedocs.io
+
+

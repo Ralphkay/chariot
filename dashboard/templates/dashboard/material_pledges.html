@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{%load static %}
+
+{% block content %}
+
+    <div class="br-pagebody mg-t-5 pd-x-30">
+    <div class="card shadow-base card-body pd-50 bd-0 mg-t-20 ">
+        <div class="card-body align-items-center">
+            <p class="tx-16 tx-primary d-flex justify-content-center">
+                Please click on the respective links to add the respective pledge (Guest/Member).
+            </p>
+        </div>
+          <div class=" d-flex justify-content-center">
+            <a href="{% url 'add_new_mmat_pledge' %}" class="btn btn-xl btn-outline-warning bd-2 mg-10 rounded-10 tx-uppercase">Add Member Material  Pledge</a>
+            <a href="{% url 'add_new_mat_pledge' %}" class="btn btn-xl btn-outline-success bd-2 mg-10 rounded-10 tx-uppercase">Add Guest Material Pledge</a>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}

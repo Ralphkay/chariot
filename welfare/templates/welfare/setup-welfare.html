@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ <div class="row mg-x-30-force form-layout form-layout-1 br-section-wrapper justify-content-center">
+      <div class="row">
+{#          <h5 class="tx-xs-xthin mg-b-10  tx-primary pd-l-15">Setup New Welfare</h5>#}
+      </div>
+                      <form method="post" action="" class="mg-x-10 mg-t-10">
+                      <h5 class="tx-xs-xthin mg-b-10 tx-primary">Setup New Welfare</h5>
+                      {%csrf_token%}
+                      {% for field in form.hidden_fields %}
+                          {{ field }}
+                      {% endfor %}
+                   <div class="row mg-5 mg-b-20 pd-5">
+                   {% for field in form.visible_fields %}
+                           {{ field.label }}
+                            {{ field }}
+                        {% if field.errors %}
+                             <div>
+                                  {{field.errors}}
+                             </div>
+                         {% endif %}
+                      {% endfor %}
+                   </div>
+
+                 <div class="mg-t-20 col-sm-6 col-md-3">
+
+                            <button type="submit" class="btn btn-outline-primary btn-block cursor">Setup New Welfare</button>
+
+            </div>
+                  </form>
+ </div>
+{% endblock %}

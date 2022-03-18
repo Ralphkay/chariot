@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{%load static %}
+
+{% block content %}
+
+    <div class="br-pagebody mg-t-5 pd-x-30">
+    <div class="card shadow-base card-body pd-50 bd-0 mg-t-20 ">
+        <div class="card-body align-items-center">
+            <p class="tx-16 tx-primary d-flex justify-content-center">
+                Please click on the respective links to add the respective pledge (Guest/Member).
+            </p>
+        </div>
+          <div class=" d-flex justify-content-center">
+            <a href="{% url 'add_new_mmon_pledge' %}" class="btn btn-xl btn-outline-primary bd-2 mg-10 rounded-10 tx-uppercase">Add Member Monetary Pledge</a>
+            <a href="{% url 'view_all_members_monetary_pledges_list' %}" class="btn btn-xl btn-outline-purple bd-2 mg-10 rounded-10 tx-uppercase">View All Members' Monetary Pledge</a>
+            <a href="{% url 'add_new_mon_pledge' %}" class="btn btn-xl btn-outline-info bd-2 mg-10 rounded-10 tx-uppercase">Add Guest Monetary Pledge</a>
+           <a href="{% url 'view_all_members_monetary_pledges_list' %}" class="btn btn-xl btn-outline-purple bd-2 mg-10 rounded-10 tx-uppercase">View All Members' Monetary Pledge</a>
+
+    </div>
+    </div>
+
+    </div>
+
+{% endblock %}

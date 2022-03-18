@@ -1,8 +1,13 @@
 import datetime
 
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
+
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
 from membership.models import Member
 
 
@@ -17,22 +22,52 @@ class Welfare(models.Model):
     def __str__(self):
         return f"{self.welfare_title}"
 
+    # @property
+    # def total_sum_of_contribution(self):
+    #     total_sum_contribution = WelfareContribution.objects.filter(welfare=self).aggregate(
+    #         Sum('amount_contributed'))
+    #
+    #     return total_sum_contribution['amount_contributed__sum']
+
+    @property
+    def check_welfare_active_status(self):
+        if datetime.datetime.today().date() > self.deadline.date():
+            return False
+        else:
+            return True
+
 
 class WelfareContribution(models.Model):
     """
         General welfare contribution by members towards events such as funerals, sick etc.
-
     """
     welfare = models.ForeignKey('Welfare', related_name='welfare_contributions', on_delete=models.CASCADE)
     member = models.ForeignKey(Member, related_name='member_welfare_contributions', on_delete=models.CASCADE)
+
     amount_contributed = models.FloatField(null=False, blank=False, default=0.00)
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
 
+
+
     def __str__(self):
         return f"{self.welfare} – {self.amount_contributed} – {self.member}"
+
+    def check_deadline(self):
+        if datetime.datetime.today().date() > self.welfare.deadline.date():
+            return True
+
+    def clean(self):
+        if self.check_deadline():
+            raise ValidationError({
+                'welfare': 'Welfare Deadline expired'
+            })
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
 class WelfareMembershipLevy(models.Model):
