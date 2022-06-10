@@ -14,7 +14,7 @@ from membership.models import Member
 class Welfare(models.Model):
     welfare_title = models.CharField(max_length=255, blank=False, null=False)
     welfare_description = models.TextField(blank=True, null=True)
-    deadline = models.DateTimeField()
+    deadline = models.DateField(blank=False, null=False)
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -48,9 +48,6 @@ class WelfareContribution(models.Model):
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-
-
-
 
     def __str__(self):
         return f"{self.welfare} – {self.amount_contributed} – {self.member}"
@@ -93,13 +90,14 @@ class WelfareMembershipLevy(models.Model):
     year = models.IntegerField(null=True, blank=True, choices=t_year_choices, default=datetime.datetime.now().year)
     month = models.CharField(max_length=100, null=True, blank=True, choices=m_months_choices,
                              default=datetime.datetime.now().year)
-    month_levy_paid = models.FloatField(null=True, blank=True, default=0)
+    month_welfare_paid = models.FloatField(null=True, blank=True, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Welfare Membership Dues'
         verbose_name_plural = 'Welfare Membership Dues'
+        unique_together = [['month', 'year']]
 
     def __str__(self):
-        return f"Payment – {self.member} – {self.year} - {self.month_levy_paid}"
+        return f"Payment – {self.member} – {self.year} - {self.month_welfare_paid}"

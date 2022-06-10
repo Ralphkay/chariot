@@ -10,7 +10,10 @@ class Pledge(models.Model):
         ('redeemed', 'Redeemed'),
     )
     pledge_person = models.CharField(max_length=255, blank=False, null=False)
-    contact_information = models.TextField(null=True, blank=True)
+    # contact_information = models.TextField(null=True, blank=True)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    email = models.EmailField(max_length=255, blank=True, null=True)
+
     redeemed_status = models.CharField(max_length=255, blank=False, null=False, choices=redeemed_status_choices,
                                        default=redeemed_status_choices[0][0])
 
@@ -29,7 +32,7 @@ class Pledge(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"{self.pledge_person} – {self.redeemed_status.capitalize()}"
+        return f"{self.person} – {self.redeemed_status.capitalize()}"
 
     def save(self, *args, **kwargs):
         if self.amount_pledged and self.amount_paid:
@@ -51,27 +54,28 @@ class MonetaryPledge(Pledge):
     item = None
     quantity_pledged = None
     quantity_redeemed = None
-    description = None
+    contact_information = None
+    # description = None
 
 
-class MaterialPledge(Pledge):
+class ItemPledge(Pledge):
     item = models.CharField(max_length=255, blank=False, null=False)
     amount_pledged = None
     amount_paid = None
 
 
 class MemberMonetaryPledge(Pledge):
-    pledge_person = models.ForeignKey(Member, on_delete=models.CASCADE)
-
+    pledge_person = models.ForeignKey(Member, null=False, blank=False, on_delete=models.CASCADE)
     item = None
     quantity_pledged = None
     quantity_redeemed = None
     description = None
+    contact_information = None
+    person = None
 
 
-class MemberMaterialPledge(Pledge):
-    pledge_person = models.ForeignKey(Member, on_delete=models.CASCADE)
+class MemberItemPledge(Pledge):
+    pledge_person = models.ForeignKey(Member, null=False, blank=False, on_delete=models.CASCADE)
     item = models.CharField(max_length=255, blank=False, null=False)
-
     amount_pledged = None
     amount_paid = None

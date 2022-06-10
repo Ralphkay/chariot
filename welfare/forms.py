@@ -1,4 +1,4 @@
-import datetime
+
 
 from django import forms
 
@@ -14,7 +14,7 @@ class WelfareMembershipLevyForm(forms.ModelForm):
             'member': forms.TextInput(attrs={'class': 'form-control', 'type': 'hidden'}),
             'month': forms.Select(attrs={'class': 'form-control'}),
             'year': forms.Select(attrs={'class': 'form-control'}),
-            'month_levy_paid': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'month_welfare_paid': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
         }
 
 
@@ -31,15 +31,11 @@ class WelfareForm(forms.ModelForm):
 
 
 class WelfareContributionForm(forms.ModelForm):
-    welfare = forms.ModelChoiceField(queryset=Welfare.objects.filter(deadline__gt=datetime.datetime.today().date()),
-                                     widget=forms.Select(attrs={'class': 'form-control'}))
-
     class Meta:
         model = WelfareContribution
         fields = "__all__"
 
         widgets = {
-            # 'welfare': forms.Select(attrs={'class': 'form-control'}),
             'member': forms.TextInput(attrs={'type': 'hidden'}),
-            'amount_contributed': forms.TextInput(attrs={'class': 'form-control'}),
+            'amount_contributed': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
         }

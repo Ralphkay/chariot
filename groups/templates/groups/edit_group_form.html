@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
+         <form method="post" class="" enctype="multipart/form-data" >
+                      <h5>Edit Group</h5>
+                      {%csrf_token%}
+                      {% for field in form.hidden_fields %}
+                          {{ field }}
+                      {% endfor %}
+                   <div class="row">
+                   {% for field in form.visible_fields %}
+                           {{ field.label }}
+                            {{ field }}
+                        {% if field.errors %}
+                             <div>
+                                  {{field.errors}}
+                             </div>
+                         {% endif %}
+                      {% endfor %}
+                   </div>
+
+                      <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                <div class="col-auto">
+                    <button type="submit" hx-push-url="true" hx-post="{% url 'edit-group' organization.id %}" class="btn app-btn-primary mt-3">Update Group
+
+                    </button>
+                </div>
+            </div>
+                  </form>
+ </div>
+{% endblock %}

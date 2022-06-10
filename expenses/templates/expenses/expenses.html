@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'shared/table-card-header.html' with header_title="Expenses" action_url='create-expense' action_button_1='Add New' dbtn=dbtn only %}
+
+    <div class="app-card-body">
+        <div class="table-responsive">
+            <table class="table mb-0 text-left" id="{{ table_name | slugify }}">
+                <thead>
+
+                    <tr>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Item</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Quantity</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Amount</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for expense in expenses %}
+                        <tr>
+                            <td class="valign-middle hidden-xs-down">{{ expense.item }}</td>
+                            <td class="valign-middle hidden-xs-down">{{ expense.quantity }}</td>
+                            <td class="valign-middle hidden-xs-down">{{ expense.amount }}</td>
+                            <td class=" ">{% include 'shared/action_buttons.html' with object=expense edit_url="edit-expense" delete_url="delete-expense" %}</td>
+                        </tr>
+                        {% include 'shared/delete-modal.html' with deleteObject=expense deleteRoute='delete-expense' %}
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+{% endblock %}

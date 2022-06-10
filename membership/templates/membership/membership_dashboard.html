@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+
+{% block customcss %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+{% endblock %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-rounded alert-{{ message.tags }} alert-style-light" role="alert">
+              {{message}}
+          </div>
+        {% endfor %}
+    {% endif %}
+
+
+       <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title text-muted">Members</div>
+                        </div>
+                        <div class="card-body">
+                             <div class="text-end mb-4">
+
+
+                                 {% if errors %}
+                                     <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     <span>
+{#                                                            <i class="material-icons-outlined">minus</i>#}
+                                                        </span>View Errors in Form</a>
+                                     {% else %}
+                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     <span>
+                                                            <i class="material-icons-outlined">add</i>
+                                                        </span>Add Member</a>
+                                 {% endif %}
+                             </div>
+                             <table id="datatable1_wrapper" class="display table table-striped dataTables_wrapper dt-bootstrap4">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Primary Phone.</th>
+{#                <th>Start date</th>#}
+{#                <th>Salary</th>#}
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Primary Phone.</th>
+{#                <th>Start date</th>#}
+{#                <th>Salary</th>#}
+            </tr>
+        </tfoot>
+
+        </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                                <!-- Modal -->
+                {% include 'membership/includes/add_member_modal.html' %}
+
+
+                <div class="col-md-4">
+
+                   <div class="card">
+                                    <img src="https://www.fillmurray.com/150/80" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Card title</h5>
+                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item">An item</li>
+                                      <li class="list-group-item">A second item</li>
+                                      <li class="list-group-item">A third item</li>
+                                    </ul>
+                                    <div class="card-body">
+                                      <a href="#" class="card-link">Card link</a>
+                                      <a href="#" class="card-link">Another link</a>
+                                    </div>
+                                  </div>
+                </div>
+
+            </div>
+       </div>
+
+{% endblock %}
+
+{% block customscripts %}
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready( function () {
+        $('#datatable1_wrapper').DataTable({
+             "ajax": {
+                "url": "/membership/members",
+                 dataSrc: "",
+                 select: true,
+                  dom: 'Bfrtip',
+                 {#mDataProp: ""#}
+
+             },
+            aoColumns: [
+                {'mData':'fields.first_name'},
+                {'mData':'fields.last_name'},
+                {'mData':'fields.gender'},
+                {'mData':'fields.primary_phone'},
+            ]
+
+
+        });
+    } );
+    </script>
+{% endblock %}

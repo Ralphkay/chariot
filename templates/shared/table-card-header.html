@@ -1,0 +1,33 @@
+    <div class="app-card app-card-progress-list h-100 shadow-sm app-card-orders-table mb-5">
+        <div class="app-card-header p-3">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                    <h4 class="app-card-title">{{ header_title }}</h4>
+                </div><!--//col-->
+                <div class="col-auto row justify-content-md-end ">
+                    <div class="col-auto">
+                    <a class="btn app-btn-secondary" href="#" hx-get="{% url action_url  %}" hx-push-url="true" hx-target="#app-body" hx-swap="outerHTML">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
+                        </svg>
+                        {{ action_button_1}}
+                    </a>
+                </div>
+                <div class="col-auto ">
+                    <a class="btn app-btn-secondary" href="#" id="{{ dbtn }}">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                            <path fill-rule="evenodd"
+                                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                        </svg>
+                        Download Excel
+                    </a>
+                </div>
+                </div>
+
+
+            </div><!--//row-->
+        </div>

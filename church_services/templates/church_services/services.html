@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'shared/table-card-header.html' with header_title="Church Services" action_url='create-service' action_button_1='Add New' dbtn=dbtn only %}
+
+    <div class="app-card-body">
+        <div class="table-responsive">
+            <table class="table mb-0 text-left" id="{{ table_name | slugify }}">
+
+                    <thead>
+                    <tr>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Service</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Description</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td class="valign-middle hidden-xs-down">{{ service }}</td>
+                            <td class="valign-middle hidden-xs-down">
+                                {% autoescape off %}
+                                {{ service.description }}
+                                {% endautoescape %}
+                            </td>
+                            <td class=" ">
+                                <span>{% include 'shared/action_buttons.html' with object=service edit_url="edit-service" delete_url="delete-service" %}</span>
+                            </td>
+                        </tr>
+                    {% include 'shared/delete-modal.html' with deleteObject=service deleteRoute='delete-service' %}
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+{% endblock %}

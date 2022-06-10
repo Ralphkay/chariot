@@ -1,0 +1,48 @@
+
+{% extends 'index.html'%}
+{% load static %}
+{% block content %}
+
+  <div class="row mg-r-10 form-layout form-layout-1 br-section-wrapper">
+      <div class="row">
+          <h5 class="tx-xs-xthin tx-primary pd-l-15">Add {{member}} Religious Info</h5>
+
+      </div>
+       <form method="post" data-parsley-validate>
+           <a href="{% url 'members'%}" class="float-lg-right btn btn-outline-primary rounded-50">Skip</a>
+                    {% csrf_token %}
+              {% if mcv_errors %}
+                   {% for field in form %}
+                       {% for error in field.errors %}
+                          <div class="alert tx-danger" style="color:#ff0000">
+                               <strong>{{ error|escape }}</strong>
+                          </div>
+                       {% endfor %}
+                   {% endfor %}
+                {% endif %}
+                    <div class="row">
+                        {% for field in mcv_form.hidden_fields%}
+                            {{ field }}
+                        {% endfor %}
+
+                        {% for field in mcv_form.visible_fields %}
+                         <div class="col-sm-3">
+                             {{ field.label }}
+                            {{ field }}
+                         {% if field.errors %}
+                             <div>
+                                  {{field.errors}}
+                             </div>
+                         {% endif %}
+
+                        </div>
+                        {% endfor %}
+                          <div class="mg-t-20 col-sm-6 col-md-3">
+
+                            <button type="submit" class="btn btn-outline-primary btn-block cursor">Add Info</button>
+
+            </div>
+                    </div>
+       </form>
+                    </div>
+{%endblock%}

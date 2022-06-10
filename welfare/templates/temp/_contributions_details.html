@@ -1,0 +1,126 @@
+<{%extends 'index.html' %}
+{% load static %}
+
+{%block content%}
+
+
+ <div class="mg-x-30">
+
+  {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-bordered alert-{{ message.tags }}" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+              {{message}}
+          </div>
+        {% endfor %}
+    {% endif %}
+ </div>
+
+
+<div class="d-flex align-items-center justify-content-start pd-x-20 pd-sm-x-30 mg-b-20 mg-sm-b-30">
+<div class="col-3">
+    {% if welfare.check_welfare_active_status %}
+        <button class="btn btn-success btn-xs tx-uppercase tx-8">Active</button>
+        {% else %}
+        <button class="btn btn-dark btn-xs tx-uppercase tx-8">Expired</button>
+    {% endif %}
+</div>
+        <div class="mg-l-auto hidden-xs-down">
+          <a href="{% url 'setup-welfare' %}" class="btn btn-primary tx-12 tx-bold tx-uppercase btn-xs">Setup Welfare</a>
+        </div>
+      </div>
+
+<div class="br-pagebody pd-x-20 pd-sm-x-30">
+        <div class="card bd-0 shadow-base">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Name of Payee</th>
+                <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Amount contributed</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+            {% for member in welfare_contributions_grouped_by_member %}
+              <tr>
+                <td class="valign-middle hidden-xs-down"><a href="{% url 'member' member.member__id %}">
+                    {% if member.member__middle_name %}
+                    {{member.member__first_name}} {{member.member__middle_name}} {{member.member__last_name}}
+                    {% else %}
+                    {{member.member__first_name}} {{member.member__last_name}}
+                    {% endif %}
+                </a></td>
+                <td class="valign-middle hidden-xs-down">{{member.amount_contributed__sum}}</td>
+              </tr>
+{% endfor %}
+<tr>
+                <td>Total</td>
+                <td>{{ total_contributions.amount_contributed__sum }}</td>
+                </tr>
+
+
+            </tbody>
+
+          </table>
+
+{% include 'groups/includes/add_new_organization.html' %}
+
+
+<!--            <div class="pagination">-->
+<!--                <span class="step-links">-->
+<!--                    {% if page_obj.has_previous %}-->
+<!--                        <a href="?page=1">&laquo; first</a>-->
+<!--                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>-->
+<!--                    {% endif %}-->
+
+<!--                    <span class="current">-->
+<!--                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
+<!--                    </span>-->
+
+<!--                    {% if page_obj.has_next %}-->
+<!--                        <a href="?page={{ page_obj.next_page_number }}">next</a>-->
+<!--                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+<!--                    {% endif %}-->
+<!--                </span>-->
+<!--            </div>-->
+
+
+
+            <div class="ht-80 bd d-flex align-items-center justify-content-center">
+              <nav aria-label="Page navigation">
+                <ul class="pagination pagination-basic mg-b-0">
+                    {% if page_obj.has_previous %}
+                  <li class="page-item">
+                      <a href="?page=1">&laquo; first</a>
+                  </li>
+
+                        <li class="page-item" ><a href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a href="?page={{ page_obj.next_page_number }}">next</a></li>
+                        <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                    {% endif %}
+                </ul>
+              </nav>
+            </div>
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+
+                     <!-- PAY WELFARE LEVY -->
+{%endblock%}

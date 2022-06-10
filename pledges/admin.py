@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from pledges.models import MonetaryPledge, MaterialPledge, MemberMonetaryPledge, MemberMaterialPledge
+from pledges.models import MonetaryPledge, ItemPledge, MemberMonetaryPledge, MemberItemPledge
 
 
 class MonetaryPledgeAdmin(admin.ModelAdmin):
@@ -11,20 +11,20 @@ class MonetaryPledgeAdmin(admin.ModelAdmin):
 admin.site.register(MonetaryPledge, MonetaryPledgeAdmin)
 
 
-class MaterialPledgeAdmin(admin.ModelAdmin):
+class ItemPledgeAdmin(admin.ModelAdmin):
     readonly_fields = ['redeemed_status']
 
 
-admin.site.register(MaterialPledge, MaterialPledgeAdmin)
+admin.site.register(ItemPledge, ItemPledgeAdmin)
 
 
-class MemberMaterialPledgeAdmin(admin.ModelAdmin):
+class MemberItemPledgeAdmin(admin.ModelAdmin):
     readonly_fields = ['redeemed_status']
 
 
-class MemberMaterialPledgeAdmin(admin.ModelAdmin):
+class MemberItemPledgeAdmin(admin.ModelAdmin):
     readonly_fields = ['redeemed_status']
 
 
-admin.site.register(MemberMonetaryPledge, MemberMaterialPledgeAdmin)
-admin.site.register(MemberMaterialPledge, MemberMaterialPledgeAdmin)
+admin.site.register(MemberMonetaryPledge, MemberItemPledgeAdmin)
+admin.site.register(MemberItemPledge, MemberItemPledgeAdmin)

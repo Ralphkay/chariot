@@ -1,17 +1,19 @@
 from django.urls import path, include
 
-from pledges.views import add_new_mmat_pledge, add_new_mmon_pledge, view_all_members_monetary_pledges_list, \
-    view_all_members_material_pledges_list, view_a_member_material_pledges_list, view_a_member_monetary_pledges_list, \
-    add_new_mon_pledge, add_new_mat_pledge, delete_member_pledge
+from pledges.views import member_money_pledges, create_money_pledge, edit_money_pledge, delete_money_pledge \
+    , create_member_money_pledge, edit_member_money_pledge, delete_member_money_pledge, money_pledges
 
 urlpatterns = [
-    path('add-new-member-monetary-pledge', add_new_mmon_pledge, name='add_new_mmon_pledge'),
-    path('add-new-member-material-pledge', add_new_mmat_pledge, name='add_new_mmat_pledge'),
-    path('add-new-material-pledge', add_new_mon_pledge, name='add_new_mon_pledge'),
-    path('add-new-material-pledge', add_new_mat_pledge, name='add_new_mat_pledge'),
-    path('all-members-material-pledge', view_all_members_material_pledges_list, name='view_all_members_material_pledges_list'),
-    path('all-members-monetary-pledge', view_all_members_monetary_pledges_list, name='view_all_members_monetary_pledges_list'),
-    path('<int:pk>/delete-member-monetary-pledge', delete_member_pledge, name='delete_member_pledge'),
-    path('<int:member_id>/a-member-material-pledge-list/', view_a_member_material_pledges_list, name='view_a_member_material_pledges_list'),
-    path('<int:member_id>/a-member-monetary-pledge-list', view_a_member_monetary_pledges_list, name='view_a_member_monetary_pledges_list'),
+
+    path('money-pledges/', money_pledges, name='money-pledges'),
+    path('add/money-pledges/', create_money_pledge, name='create-money-pledge'),
+    path('edit/money-pledges/<int:pledge_pk>/', edit_money_pledge, name='edit-money-pledge'),
+    path('delete/money-pledges/<int:pledge_pk>/', delete_money_pledge, name='delete-money-pledge'),
+
+
+    path('<int:member_pk>/member-money-pledges', member_money_pledges, name='member-money-pledges'),
+    path('add/<int:member_pk>/member-money-pledges', create_member_money_pledge, name='create-member-money-pledge'),
+    path('edit/<int:member_pk>/member-money-pledges/<int:pledge_pk>', edit_member_money_pledge, name='edit-member-money-pledge'),
+    path('delete/<int:member_pk>/member-money-pledges/<int:pledge_pk>', delete_member_money_pledge, name='delete-member-money-pledge'),
+
 ]

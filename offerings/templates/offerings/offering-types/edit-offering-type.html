@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+ <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
+         <form method="post" enctype="multipart/form-data">
+                      <h5>Edit Offering Type</h5>
+                      {%csrf_token%}
+                      {% for field in form.hidden_fields %}
+                          {{ field }}
+                      {% endfor %}
+                   <div class="row  ">
+                       {{ form.as_p }}
+
+                   </div>
+              <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                <div class="col-auto">
+                    <button type="submit" hx-push-url="true" hx-post="{% url 'edit-offering-type' offering_type.id %}" class="btn app-btn-primary mt-3">Update Offering Type </button>
+                </div>
+            </div>
+         </form>
+ </div>
+
+{% endblock %}

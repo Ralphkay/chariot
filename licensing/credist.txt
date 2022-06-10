@@ -1,0 +1,23 @@
+This is the redist.txt file mentioned in the associated Intel End User License 
+Agreement for Developer Tools (Version October 2020) (“Agreement”).  All 
+capitalized terms used but not defined in this file have the same meaning as 
+specified in the Agreement. The Redistributables are listed below, and are 
+subject to all of the terms and conditions of the Agreement.
+
+Please note that Third Party Programs, if any, may also be redistributable. See 
+the “third-party-programs.txt” or other similarly-named text file for more 
+details.”
+
+################################################################################
+###   Intel® C++ Compiler Classic 2022.1.0
+################################################################################
+
+<installdir>/lib/libiomp5.dylib
+<installdir>/lib/libiomp5_db.dylib
+<installdir>/lib/libiompstubs5.dylib
+<installdir>/lib/libchkp.dylib
+<installdir>/lib/libimf.dylib
+<installdir>/lib/libintlc.dylib
+<installdir>/lib/libirc.dylib
+<installdir>/lib/libirng.dylib
+<installdir>/lib/libsvml.dylib

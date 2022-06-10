@@ -1,0 +1,42 @@
+{% load static%}
+
+<div class="card bd-0 shadow-base pd-30 mg-t-20">
+              <div class="d-flex align-items-center justify-content-between mg-b-30">
+                <div>
+                  <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1 text-primary">Newly Registered Members</h6>
+                  <p class="mg-b-0"><i class="icon ion-calendar mg-r-5"></i> From October 2017 - December 2017</p>
+                </div>
+                <a href=" {% url 'all-members' %} " class="btn btn-outline-primary btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">See more</a>
+              </div><!-- d-flex -->
+
+  <table class="table table-valign-middle mg-b-0">
+                <tbody>
+                {% for member in recently_added%}
+                  <tr>
+                    <td class="pd-l-0-force">
+                      <img src="{{ member.profile_photo.url }}" class="avatar" alt="">
+                    </td>
+                    <td>
+                      <h6 class="tx-inverse tx-14 text-primary ">
+                          <a href="{% url 'member' member.id %}">{{member}}</a>
+                      </h6>
+                      <span class="tx-12">{{member.email}}</span>
+                    </td>
+                     <td>
+                      <h6 class="tx-inverse tx-14 mg-b-0">{{member.occupation | title}}</h6>
+                      <span class="tx-12">Occupation</span>
+                    </td>
+                     <td>
+                      <h6 class="tx-inverse tx-14 mg-b-0 text-muted">{{member.residential_address}}</h6>
+                      <span class="tx-12">Location</span>
+                    </td>
+                  </tr>
+
+                {%endfor%}
+
+
+
+
+                </tbody>
+              </table>
+            </div>

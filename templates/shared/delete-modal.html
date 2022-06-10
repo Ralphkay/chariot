@@ -1,0 +1,26 @@
+<div id="deleteModal-{{ deleteObject.id }}" class="modal fade" hx-target="#app-body" hx-swap="outerHTML">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content bd-0 tx-14">
+                                    <div class="modal-header pd-x-20">
+                                        <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Confirm</h6>
+                                       <button type="button" class="btn-close btn-xs" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body pd-20">
+                                        <p class="mg-b-5">
+                                            Are you sure you want to delete this record?
+                                            <small>{{ deleteObject }}</small>
+                                        </p>
+                                    </div>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="submit" hx-post="{% url deleteRoute deleteObject.id %}" hx-push-url="true"
+                                                    class="btn app-btn-primary">
+                                                Delete
+                                            </button>
+                                           <button type="button"  class="btn  app-btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- modal-dialog -->
+                        </div><!-- modal -->

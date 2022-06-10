@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% include 'shared/table-card-header.html' with header_title="Members" action_url='add-member' action_button_1='Create New' dbtn=dbtn only %}
+    <div class="app-card app-card-orders-table mb-5">
+        <div class="app-card-body">
+            <div class="table-responsive">
+                <table class="table mb-0 text-left fs-6" id="{{ table_name | slugify }}">
+                    <thead>
+                    <tr>
+                        <th class="tx-10-force tx-mont tx-medium">Name/Email</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Phone</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Occupation</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">DOB</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Gender</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">City/Town</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Contributions</th>
+                        <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="">
+
+                    {% for member in members %}
+                        <tr>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="text-center text-lg-left">
+                                        <img src="{{ member.get_profile_photo_url }}" style="width:48px; height:48px" class="profile-image">
+					            </div>
+
+                                <div class="text-lg-left m">
+                                    <div class="ms-4 text-dark"><a
+                                            href="{% url 'member' member.id %}">{{ member.fullname |title }}</a>
+                                            <div>
+                                                <span class="tx-12">{{ member.email }}</span>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </td>
+
+                            <td class="valign-middle hidden-xs-down">{{ member.primary_phone }}</td>
+
+                            <td class="valign-middle hidden-xs-down">{{ member.occupation | title }}</td>
+                            <td class="valign-middle hidden-xs-down">{{ member.date_of_birth | title }}</td>
+
+                            <td class="valign-middle hidden-xs-down">{{ member.gender | title }}</td>
+
+                            <td class="valign-middle hidden-xs-down">{{ member.city_or_town }}</td>
+
+                            <td class="valign-middle hidden-xs-down">
+{#                                <a hx-push-url="true" class="btn btn-sm app-btn-secondary"  href="#" hx-get="{% url 'levies' member.id %}"  hx-target="#app-body" hx-swap="outerHTML">Levy</a>#}
+{#                                <a class="btn btn-sm app-btn-secondary" hx-get="" hx-push-url="true" hx-target="#app-body" hx-swap="outerHTML">Donate</a>#}
+                                <form action="" hx-trigger="change" hx-target="#donation" hx-indicator=".htmx-indicator">
+                                     <label for="donation"></label>
+                                <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                    <option value="">Select</option>
+                                    <option value="{% url 'levies' member.id %}">Levies</option>
+                                    <option value="{% url 'welfares' member.id %}">Welfare</option>
+                                    <option value="{% url 'member-money-donations' member.id %}">Monetary Donations</option>
+                                    <option value="{% url 'item-donations' member.id %}">Item Donation</option>
+                                    <option value="{% url 'member-money-pledges' member.id %}">Monetary Pledge</option>
+{#
+                                </select>
+
+                                </form>
+
+                            </td>
+
+                        <td class=" ">{% include 'shared/action_buttons.html' with object=member edit_url="edit-member" delete_url="delete-member" %}</td>
+                        </tr>
+                        {% include 'shared/delete-modal.html' with deleteObject=member deleteRoute='delete-member' %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<div class="card pd-0 bd-0 shadow-base">
+              <div class="pd-x-30 pd-t-30 pd-b-15">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1 text-primary">Verse of the Day</h6>
+                    <p class="mg-b-0 text-muted">A moment with God's Word.</p>
+                  </div>
+<!--                  <div class="tx-13">-->
+<!--                    <p class="mg-b-0"><span class="square-8 rounded-circle bg-purple mg-r-10"></span> TCP Reset Packets</p>-->
+<!--                    <p class="mg-b-0"><span class="square-8 rounded-circle bg-pink mg-r-10"></span> TCP FIN Packets</p>-->
+<!--                  </div>-->
+                </div><!-- d-flex -->
+              </div>
+              <div class="pd-x-15 pd-b-15">
+                <div class=" ht-120 ht-sm-200">
+                  <div class="pd-x-15 text-primary" style="font-size:18px" hx-get="{% url 'verse_of_the_day' %}" hx-trigger="load delay:1s">
+
+                  </div>
+                </div>
+              </div>
+            </div>

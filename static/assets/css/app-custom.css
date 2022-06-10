@@ -1,0 +1,32 @@
+ul.errorlist{
+    color:red;
+    list-style:none;
+}
+
+.app-auth-wrapper{
+    /*background:#1AB970;*/
+  /*  background: url('../images/background/bg2.png') no-repeat center center fixed !important;*/
+  /*-webkit-background-size: cover;*/
+  /*-moz-background-size: cover;*/
+  /*-o-background-size: cover;*/
+  /*background-size: cover;*/
+}
+
+/*.app-auth-body{*/
+/*    margin-top:50px;*/
+/*    background: white;*/
+/*    padding: 20px;*/
+/*    border-radius: 3px;*/
+/*    box-shadow:2px 4px 3px rgba(0,0,0,0.06)*/
+/*}*/
+
+.auth-background-holder{
+    background: url('../images/background/green.png') no-repeat center center fixed !important;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+
+
+
+}
