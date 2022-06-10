@@ -103,11 +103,11 @@ WSGI_APPLICATION = 'churchclicks.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'workingdb',
+        'NAME': 'princedb',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5438',
+        'PORT': '5432',
     }
 }
 

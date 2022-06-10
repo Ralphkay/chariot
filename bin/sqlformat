@@ -1,4 +1,4 @@
-#!/Users/raphaelamponsah/Developer/pydev/churchclicks/bin/python3.9
+#!/Users/raphaelamponsah/Developer/pydev/churchclicks/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
